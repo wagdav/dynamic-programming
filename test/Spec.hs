@@ -6,7 +6,7 @@ import Lib
 
 spec = describe "Min Coin Exchange" $ do
     it "solves the example" $
-       change [1, 5, 10, 20, 25] 40 `shouldBe` [20, 20] 
+       change 40 4 `shouldBe` Just 2
 
 main :: IO ()
 main = hspec $ do

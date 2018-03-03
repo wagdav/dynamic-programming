@@ -35,6 +35,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - dynamic-programming
+    - criterion
 
 tests:
   dynamic-programming-test:

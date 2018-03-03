@@ -4,7 +4,8 @@ module Lib
 
 import Control.Applicative
 
-
+-- Available coin denominators.
+-- Example suggested by: http://www.algorithmist.com/index.php/Min-Coin_Change
 coins = [1, 5, 10, 20, 25]
 
 type Change = Maybe Int

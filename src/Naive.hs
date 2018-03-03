@@ -1,4 +1,4 @@
-module Lib
+module Naive
     ( change
     ) where
 

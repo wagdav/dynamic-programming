@@ -1,7 +1,7 @@
 module Main where
 
 import Criterion.Main
-import Lib
+import Naive
 
 changeAmount amount = change amount 4
 

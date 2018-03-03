@@ -2,7 +2,7 @@
 
 import Test.Hspec
 
-import Lib
+import Naive
 
 spec = describe "Min Coin Exchange" $ do
     it "solves the example" $

@@ -5,4 +5,4 @@ module Denominators
 -- Available coin denominators.
 -- Example suggested by: http://www.algorithmist.com/index.php/Min-Coin_Change
 coins :: [Int]
-coins = [1, 5, 10, 20, 25]
+coins = [25, 20, 10, 5, 1]

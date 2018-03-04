@@ -2,13 +2,8 @@ module Naive
     ( change
     ) where
 
-import Control.Applicative
-
--- Available coin denominators.
--- Example suggested by: http://www.algorithmist.com/index.php/Min-Coin_Change
-coins = [1, 5, 10, 20, 25]
-
-type Change = Maybe Int
+import Change
+import Denominators
 
 change :: Int -> Int -> Change
 change n m
@@ -21,9 +16,3 @@ change n m
     left = change n (m - 1)
     right = (+1) `fmap` change (n - sm) m
     sm = coins !! m
-
-minOf :: Change -> Change -> Change
-minOf x y = case (x, y) of
-  (Just x, Just y) -> Just (min x y)
-  _                -> x <|> y
-

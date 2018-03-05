@@ -1,11 +1,11 @@
 module Main where
 
 import Criterion.Main
-import qualified Dynamic
-import qualified Naive
+import qualified Coin.Dynamic
+import qualified Coin.Naive
 
-changeNaive amount = Naive.change amount 4
-changeDynamic amount = Dynamic.change amount 4
+changeNaive amount = Coin.Naive.change amount 4
+changeDynamic amount = Coin.Dynamic.change amount 4
 
 main :: IO ()
 main = defaultMain

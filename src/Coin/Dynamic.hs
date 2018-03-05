@@ -1,12 +1,12 @@
-module Dynamic
+module Coin.Dynamic
     ( change
     ) where
 
 import qualified Data.Map.Strict as M
 import Control.Monad.Trans.State
 
-import Change
-import Denominators
+import Coin.Change
+import Coin.Denominators
 
 type Dyn = State (M.Map (Int, Int) Change)
 

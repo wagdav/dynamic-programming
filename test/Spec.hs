@@ -2,8 +2,8 @@
 
 import Test.Hspec
 
-import qualified Dynamic
-import qualified Naive
+import qualified Coin.Dynamic as Naive
+import qualified Coin.Naive as Dynamic
 
 specNaive = describe "Min Coin Exchange (naive implementation)" $ do
     it "40 = 2 x 20" $

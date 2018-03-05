@@ -1,4 +1,4 @@
-module Denominators
+module Coin.Denominators
     ( coins
     ) where
 

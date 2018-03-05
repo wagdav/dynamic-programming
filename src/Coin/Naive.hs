@@ -1,9 +1,9 @@
-module Naive
+module Coin.Naive
     ( change
     ) where
 
-import Change
-import Denominators
+import Coin.Change
+import Coin.Denominators
 
 change :: Int -> Int -> Change
 change n m

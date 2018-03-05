@@ -1,4 +1,4 @@
-module Change
+module Coin.Change
     ( Change
     , minOf
     ) where

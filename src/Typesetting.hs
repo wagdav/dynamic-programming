@@ -1,52 +1,54 @@
 module Typesetting
-    (
+    ( justify
     ) where
 
-import Data.Ord
-import Data.List
+import Data.Ord     (comparing)
+import Data.List    (intercalate, minimumBy)
 
-type LineWidth = Int
+type Width = Int
 type Words = [String]
 
-inputWords = words "Daddy, please buy me a little baby humuhummunukunukuspua!"
-lineWidth = 25
-
-totalWidth ws i j = widthWords + widthSpaces
+totalWidth :: Words -> Width
+totalWidth ws = widthWords + widthSpaces
   where
-   widthWords = sum $ map length (slice i j ws)
-   widthSpaces = j - i
+   widthWords = sum $ map length ws
+   widthSpaces = length ws - 1
 
-cost ws lw i j
-    | totalWidth ws i j > lw = 1/0
-    | otherwise              = (fromIntegral num / fromIntegral denom) ^ 3
+cost :: Width -> Words -> Float
+cost lw ws
+    | totalWidth ws > lw = read "Infinity"
+    | otherwise          = (fromIntegral num / fromIntegral denom) ^ 3
   where
-    num = extraRoom ws lw i j
-    denom = j - i
+    num = extraRoom lw ws
+    denom = length ws
 
+extraRoom :: Width -> Words -> Width
+extraRoom lw ws = lw - totalWidth ws
 
-extraRoom ws lw i j = lw - totalWidth ws i j
+factor :: Width -> Words -> Float
+factor lw ws = fromIntegral (extraRoom lw ws + 1) / fromIntegral (length ws - 1)
 
-factor ws lw i j = fromIntegral (extraRoom ws lw i j) / fromIntegral (j - i)
-
---f :: Int -> Float
-f i
-    | i >= n     = (0, i)
-    | otherwise  = (minCost, index + i)
+nextBreak :: Width -> Words -> (Words, Words)
+nextBreak lw ws = snd $ go ws
   where
-    (minCost, index) = mini [ c i j + (fst $ f (j + 1)) | j <- [i..n]]
-    c = cost inputWords lineWidth
-    n = length inputWords - 1
+    go []  = (0, ([], []))
+    go ws = minimum' $ map costOf (splits ws)
 
-slice :: Int -> Int -> [a] -> [a]
-slice from to xs = take (to - from + 1) (drop from xs)
+    costOf (p1, p2) = (cost lw p1 + (fst $ go p2), (p1, p2))
 
-mini xs = minimumBy (comparing fst) (zip xs [0..])
+    splits ws = [splitAt i ws | i <- [1..length ws]]
+    minimum' = minimumBy (comparing fst)
 
-printResult :: IO ()
-printResult = do
+justify lw ws = go $ nextBreak lw ws
+  where
+    go (next, [])   = unwords' next
+    go (next, rest) = unwords' next  ++ "\n" ++ (go $ nextBreak lw rest)
+
+    unwords' ws = intercalate (spaces ws) ws
+    spaces ws = replicate (max 1 $ round $ factor lw ws) ' '
+
+printResult :: String -> Int -> IO ()
+printResult text lineWidth = do
     putStrLn $ replicate lineWidth '='
-    putStrLn $ intercalate (spaces 0 2) (slice 0 2 inputWords)
-    putStrLn $ intercalate (spaces 3 6) (slice 3 6 inputWords)
-    putStrLn $ intercalate (spaces 7 7) (slice 7 7 inputWords)
-  where
-   spaces i j = replicate (round $ 1 + factor inputWords lineWidth i j) ' '
+    putStrLn $ justify lineWidth (words text)
+    putStrLn $ replicate lineWidth '='

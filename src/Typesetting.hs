@@ -17,10 +17,10 @@ totalWidth ws = widthWords + widthSpaces
 cost :: Width -> Words -> Float
 cost lw ws
     | totalWidth ws > lw = read "Infinity"
-    | otherwise          = (fromIntegral num / fromIntegral denom) ^ 3
+    | otherwise          = (num / denom) ^ 3
   where
-    num = extraRoom lw ws
-    denom = length ws
+    num = fromIntegral $ extraRoom lw ws
+    denom = fromIntegral $ length ws
 
 extraRoom :: Width -> Words -> Width
 extraRoom lw ws = lw - totalWidth ws

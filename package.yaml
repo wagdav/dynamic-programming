@@ -28,8 +28,8 @@ library:
   source-dirs: src
 
 executables:
-  dynamic-programming-exe:
-    main:                Main.hs
+  coin:
+    main:                CoinApp.hs
     source-dirs:         app
     ghc-options:
     - -threaded

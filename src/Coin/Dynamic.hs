@@ -16,8 +16,8 @@ change m n = evalState (changeD m n) M.empty
 changeD :: Int -> Int -> Dyn Change
 changeD n m
   | n == 0            = return $ Just 0
-  | n < 0             = return $ Nothing
-  | n >= 1 && m <= 0  = return $ Nothing
+  | n < 0             = return Nothing
+  | n >= 1 && m <= 0  = return Nothing
   | otherwise         = do
 
     left <- memorize n (m - 1)

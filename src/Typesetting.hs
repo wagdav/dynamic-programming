@@ -34,7 +34,7 @@ nextBreak lw ws = snd $ go ws
     go []  = (0, ([], []))
     go ws = minimum' $ map costOf (splits ws)
 
-    costOf (p1, p2) = (cost lw p1 + (fst $ go p2), (p1, p2))
+    costOf (p1, p2) = (cost lw p1 + fst (go p2), (p1, p2))
 
     splits ws = [splitAt i ws | i <- [1..length ws]]
     minimum' = minimumBy (comparing fst)
@@ -42,7 +42,7 @@ nextBreak lw ws = snd $ go ws
 justify lw ws = go $ nextBreak lw ws
   where
     go (next, [])   = unwords' next
-    go (next, rest) = unwords' next  ++ "\n" ++ (go $ nextBreak lw rest)
+    go (next, rest) = unwords' next  ++ "\n" ++ go (nextBreak lw rest)
 
     unwords' ws = intercalate (spaces ws) ws
     spaces ws = replicate (max 1 $ round $ factor lw ws) ' '

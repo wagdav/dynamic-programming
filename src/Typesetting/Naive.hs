@@ -39,6 +39,7 @@ nextBreak lw ws = snd $ go ws
     splits ws = [splitAt i ws | i <- [1..length ws]]
     minimum' = minimumBy (comparing fst)
 
+justify :: Width -> Words -> String
 justify lw ws = go $ nextBreak lw ws
   where
     go (next, [])   = unwords' next

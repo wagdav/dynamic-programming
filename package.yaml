@@ -29,8 +29,8 @@ library:
 
 executables:
   coin:
-    main:                CoinApp.hs
-    source-dirs:         app
+    main:                Main.hs
+    source-dirs:         app/coin
     ghc-options:
     - -threaded
     - -rtsopts
@@ -38,6 +38,16 @@ executables:
     dependencies:
     - dynamic-programming
     - criterion
+
+  justify:
+    main:                Main.hs
+    source-dirs:         app/justify
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - dynamic-programming
 
 tests:
   dynamic-programming-test:

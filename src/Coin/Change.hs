@@ -8,7 +8,5 @@ import Control.Applicative ((<|>))
 type Change = Maybe Int
 
 minOf :: Change -> Change -> Change
-minOf x y = case (x, y) of
-  (Just a, Just b) -> Just (min a b)
-  _                -> x <|> y
-
+minOf (Just i) (Just j) = Just (min i j)
+minOf c1 c2             = c1 <|> c2

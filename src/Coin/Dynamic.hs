@@ -30,10 +30,10 @@ changeD n m
 memorize :: Int -> Int -> Dyn Change
 memorize n m = do
     val <- do
-        elem <- gets $ M.lookup (n, m)
+        elem <- gets $ M.lookup (n, m)  -- try to recall the solution
         case elem of
-            Just x  -> return x
-            Nothing -> changeD n m
+            Just x  -> return x         -- return previously stored solution
+            Nothing -> changeD n m      -- compute the solution
 
-    modify $ M.insert (n, m) val
+    modify $ M.insert (n, m) val        -- store the solution
     return val
